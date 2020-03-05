@@ -5,13 +5,11 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var directionalLight = new THREE.DirectionalLight( 0x00ff00, 1 );
+scene.add( directionalLight );
+
 var geometry = new THREE.BoxGeometry();
-for ( var i = 0; i < geometry.faces.length/2; i ++ ) {
-	const currentCol =  Math.random() * 0xffffff;
-	geometry.faces[ 2*i ].color.setHex(currentCol);
-	geometry.faces[ 2*i+1 ].color.setHex(currentCol);
-}
-var material = new THREE.MeshBasicMaterial({ color: 0xffffff, vertexColors: THREE.FaceColors });
+var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
