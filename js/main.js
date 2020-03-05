@@ -5,8 +5,18 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var directionalLight = new THREE.DirectionalLight( 0x00ff00, 1 );
-scene.add( directionalLight );
+var directionalLights = [];
+var directions = [
+	new THREE.Vector3(0, 0, 1).normalize(),
+	new THREE.Vector3(0, 1, 0).normalize(),
+	new THREE.Vector3(1, 0, 0).normalize()
+];
+for(var i = 0; i < 3; i++){
+	var currentDirectionalLight = new THREE.DirectionalLight( Math.pow(256, i) * 0x0000ff );
+	currentDirectionalLight.position.copy(directions[i]);
+	directionalLights.push(currentDirectionalLight);
+	scene.add(currentDirectionalLight);
+}
 
 var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
