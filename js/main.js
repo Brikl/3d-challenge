@@ -20,19 +20,27 @@ for(var i = 0; i < 3; i++){
 
 var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-var cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+
+var cubes = [];
+
+for(var i = 0; i < 28; i++){
+	var cube = new THREE.Mesh(geometry, material);
+	cube.position.set(10*(Math.random()-0.5), 10*(Math.random()-0.5), 100*(Math.random()-0.9));
+	scene.add(cube);
+	cubes.push(cube);
+}
 
 camera.position.z = 5;
-
 var rotVec = new THREE.Vector3(0.01,-0.01,-0.01);
 
 var animate = function () {
 	requestAnimationFrame(animate);
 
-	cube.rotation.x += rotVec.x;
-	cube.rotation.y += rotVec.y;
-	cube.rotation.z += rotVec.z;
+	cubes.map((cube) => {
+		cube.rotation.x += rotVec.x;
+		cube.rotation.y += rotVec.y;
+		cube.rotation.z += rotVec.z;
+	});
 
 	renderer.render(scene, camera);
 };
