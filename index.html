@@ -10,4 +10,12 @@
 		<script src="js/three.min.js"></script>
 		<script src="js/main.js"></script>
 	</body>
+	<script>
+		window.addEventListener('resize', handleResize, false);
+		function handleResize(){
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+		}
+	</script>
 </html>
