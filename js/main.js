@@ -27,16 +27,22 @@ for(var i = 0; i < 28; i++){
 	var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
 	cube.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 10*(Math.random()-0.8));
 	scene.add(cube);
-	cubes.push(cube);
+
+	var rotVec = new THREE.Vector3(
+		0.01 * (2*Math.round(Math.random()) - 1),
+		0.01 * (2*Math.round(Math.random()) - 1),
+		0.01 * (2*Math.round(Math.random()) - 1)
+	);
+	cubes.push([cube, rotVec]);
 }
 
 camera.position.z = 5;
-var rotVec = new THREE.Vector3(0.01,-0.01,-0.01);
+
 
 var animate = function () {
 	requestAnimationFrame(animate);
 
-	cubes.map((cube) => {
+	cubes.map(([cube, rotVec]) => {
 		cube.rotation.x += rotVec.x;
 		cube.rotation.y += rotVec.y;
 		cube.rotation.z += rotVec.z;
