@@ -18,13 +18,13 @@ for(var i = 0; i < 3; i++){
 	scene.add(currentDirectionalLight);
 }
 
-var geometry = new THREE.BoxGeometry();
+var geometries = [new THREE.BoxGeometry(), new THREE.SphereGeometry(0.5, 32, 32), new THREE.TetrahedronGeometry() ];
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 var cubes = [];
 
 for(var i = 0; i < 28; i++){
-	var cube = new THREE.Mesh(geometry, material);
+	var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
 	cube.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 10*(Math.random()-0.8));
 	scene.add(cube);
 	cubes.push(cube);
