@@ -21,20 +21,24 @@ for(var i = 0; i < 3; i++){
 var geometries = [new THREE.BoxGeometry(), new THREE.SphereGeometry(0.5, 32, 32), new THREE.TetrahedronGeometry() ];
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
-var cubes = [];
+var objects = [];
 var rotSpeed = 0.01;
 
-for(var i = 0; i < 28; i++){
-	var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
-	cube.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 10*(Math.random()-0.8));
-	scene.add(cube);
+function generateNewObject() {
+	var currentObject = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
+	currentObject.position.set(15 * (Math.random() - 0.5), 15 * (Math.random() - 0.5), 10 * (Math.random() - 0.8));
+	scene.add(currentObject);
 
 	var rotVec = new THREE.Vector3(
-		(2*Math.round(Math.random()) - 1),
-		(2*Math.round(Math.random()) - 1),
-		(2*Math.round(Math.random()) - 1)
+		(2 * Math.round(Math.random()) - 1),
+		(2 * Math.round(Math.random()) - 1),
+		(2 * Math.round(Math.random()) - 1)
 	);
-	cubes.push([cube, rotVec]);
+	objects.push([currentObject, rotVec]);
+}
+
+for(var i = 0; i < 28; i++){
+	generateNewObject();
 }
 
 camera.position.z = 5;
@@ -43,10 +47,10 @@ camera.position.z = 5;
 var animate = function () {
 	requestAnimationFrame(animate);
 
-	cubes.map(([cube, rotVec]) => {
-		cube.rotation.x += rotSpeed * rotVec.x;
-		cube.rotation.y += rotSpeed * rotVec.y;
-		cube.rotation.z += rotSpeed * rotVec.z;
+	objects.map(([currentObject, rotVec]) => {
+		currentObject.rotation.x += rotSpeed * rotVec.x;
+		currentObject.rotation.y += rotSpeed * rotVec.y;
+		currentObject.rotation.z += rotSpeed * rotVec.z;
 	});
 
 	renderer.render(scene, camera);

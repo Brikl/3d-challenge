@@ -41,18 +41,6 @@
 		rotSpeed = event.target.value;
 		document.getElementById('rotval-label').innerHTML = rotSpeed;
 	}
-	function generateNewObject() {
-		var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
-		cube.position.set(15 * (Math.random() - 0.5), 15 * (Math.random() - 0.5), 10 * (Math.random() - 0.8));
-		scene.add(cube);
-
-		var rotVec = new THREE.Vector3(
-			(2 * Math.round(Math.random()) - 1),
-			(2 * Math.round(Math.random()) - 1),
-			(2 * Math.round(Math.random()) - 1)
-		);
-		cubes.push([cube, rotVec]);
-	}
 </script>
 
 </html>
