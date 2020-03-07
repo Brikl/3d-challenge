@@ -1,5 +1,5 @@
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -25,7 +25,7 @@ var cubes = [];
 
 for(var i = 0; i < 28; i++){
 	var cube = new THREE.Mesh(geometry, material);
-	cube.position.set(10*(Math.random()-0.5), 10*(Math.random()-0.5), 100*(Math.random()-0.9));
+	cube.position.set(15*(Math.random()-0.5), 15*(Math.random()-0.5), 10*(Math.random()-0.8));
 	scene.add(cube);
 	cubes.push(cube);
 }
