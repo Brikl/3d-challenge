@@ -22,6 +22,7 @@ var geometries = [new THREE.BoxGeometry(), new THREE.SphereGeometry(0.5, 32, 32)
 var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 var cubes = [];
+var rotSpeed = 0.01;
 
 for(var i = 0; i < 28; i++){
 	var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
@@ -29,9 +30,9 @@ for(var i = 0; i < 28; i++){
 	scene.add(cube);
 
 	var rotVec = new THREE.Vector3(
-		0.01 * (2*Math.round(Math.random()) - 1),
-		0.01 * (2*Math.round(Math.random()) - 1),
-		0.01 * (2*Math.round(Math.random()) - 1)
+		(2*Math.round(Math.random()) - 1),
+		(2*Math.round(Math.random()) - 1),
+		(2*Math.round(Math.random()) - 1)
 	);
 	cubes.push([cube, rotVec]);
 }
@@ -43,9 +44,9 @@ var animate = function () {
 	requestAnimationFrame(animate);
 
 	cubes.map(([cube, rotVec]) => {
-		cube.rotation.x += rotVec.x;
-		cube.rotation.y += rotVec.y;
-		cube.rotation.z += rotVec.z;
+		cube.rotation.x += rotSpeed * rotVec.x;
+		cube.rotation.y += rotSpeed * rotVec.y;
+		cube.rotation.z += rotSpeed * rotVec.z;
 	});
 
 	renderer.render(scene, camera);
