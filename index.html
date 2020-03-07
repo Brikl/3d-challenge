@@ -1,30 +1,58 @@
 <html>
-	<head>
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { display: block; overflow: hidden; }
-		</style>
-	</head>
-	<body>
-		<script src="js/three.min.js"></script>
-		<script src="js/main.js"></script>
-		<div style="position: absolute; right: 1vmin; top: 1vmin; background-color: white; width: 20vmax; padding: 10px; border-radius: 5px">
-			<span style="font-family: monospace; font-size: 1.5vmax; text-align: center; margin: auto; display: block;">Rotation Speed</span> 
-			<input type="range" min="0" max="0.1" step="0.001" value="0.01" style="width: 100%; font-size: 3vmax;" oninput="handleRotation(event)"/>
-			<label id="rotval-label" style="font-family: monospace; font-size: 1vmax; text-align: center; margin: auto; display: block;">0.01</label>
-		</div>
-	</body>
-	<script>
-		window.addEventListener('resize', handleResize, false);
-		function handleResize(){
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize(window.innerWidth, window.innerHeight);
+
+<head>
+	<title>My first three.js app</title>
+	<style>
+		body {
+			margin: 0;
 		}
-		function handleRotation(event){
-			rotSpeed = event.target.value;
-			document.getElementById('rotval-label').innerHTML = rotSpeed;
+
+		canvas {
+			display: block;
+			overflow: hidden;
 		}
-	</script>
+	</style>
+</head>
+
+<body>
+	<script src="js/three.min.js"></script>
+	<script src="js/main.js"></script>
+	<div
+		style="position: absolute; right: 1vmin; top: 1vmin; background-color: white; width: 20vmax; padding: 10px; border-radius: 5px">
+		<span
+			style="font-family: monospace; font-size: 1.5vmax; text-align: center; margin: auto; display: block;">Rotation
+			Speed</span>
+		<input type="range" min="0" max="0.1" step="0.001" value="0.01" style="width: 100%; font-size: 3vmax;"
+			oninput="handleRotation(event)" />
+		<label id="rotval-label"
+			style="font-family: monospace; font-size: 1vmax; text-align: center; margin: auto; display: block;">0.01</label>
+		<br />
+		<button onclick="generateNewObject()" style="display: block; margin: auto;">Add new random object</button>
+	</div>
+</body>
+<script>
+	window.addEventListener('resize', handleResize, false);
+	function handleResize() {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+	}
+	function handleRotation(event) {
+		rotSpeed = event.target.value;
+		document.getElementById('rotval-label').innerHTML = rotSpeed;
+	}
+	function generateNewObject() {
+		var cube = new THREE.Mesh(geometries[Math.floor(Math.random() * geometries.length)], material);
+		cube.position.set(15 * (Math.random() - 0.5), 15 * (Math.random() - 0.5), 10 * (Math.random() - 0.8));
+		scene.add(cube);
+
+		var rotVec = new THREE.Vector3(
+			(2 * Math.round(Math.random()) - 1),
+			(2 * Math.round(Math.random()) - 1),
+			(2 * Math.round(Math.random()) - 1)
+		);
+		cubes.push([cube, rotVec]);
+	}
+</script>
+
 </html>
